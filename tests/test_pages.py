@@ -18,17 +18,17 @@ _ROOT = Path(__file__).resolve().parents[1]
 
 PAGINE = [
     "app.py",
-    "pages/01_Home.py",
-    "pages/02_Comparti.py",
-    "pages/03_Assunzioni.py",
-    "pages/04_Correlazioni.py",
-    "pages/05_Asset_Allocation_Lab.py",
-    "pages/06_Simulazioni.py",
-    "pages/07_Confronto.py",
-    "pages/08_Controlli.py",
-    "pages/09_Report.py",
-    "pages/10_Simulazione_CMA_Stress.py",
-    "pages/11_Ottimizzazione_AAS.py",
+    "views/01_Home.py",
+    "views/02_Comparti.py",
+    "views/03_Assunzioni.py",
+    "views/04_Correlazioni.py",
+    "views/05_Asset_Allocation_Lab.py",
+    "views/06_Simulazioni.py",
+    "views/07_Confronto.py",
+    "views/08_Controlli.py",
+    "views/09_Report.py",
+    "views/10_Simulazione_CMA_Stress.py",
+    "views/11_Ottimizzazione_AAS.py",
 ]
 
 
@@ -40,7 +40,7 @@ def test_pagina_si_esegue_senza_eccezioni(pagina):
 
 def test_aa_lab_ricalcola_su_modifica_slider():
     at = AppTest.from_file(
-        str(_ROOT / "pages/05_Asset_Allocation_Lab.py"), default_timeout=60
+        str(_ROOT / "views/05_Asset_Allocation_Lab.py"), default_timeout=60
     ).run()
     assert len(at.slider) == 7
     assert len(at.metric) >= 4

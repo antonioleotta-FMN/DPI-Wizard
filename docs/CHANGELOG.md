@@ -3,6 +3,13 @@
 Tutte le modifiche rilevanti, per milestone. Le versioni stabili sono marcate con tag
 Git (DEC-010).
 
+## [1.0.2] — Fix deploy definitivo (cartella views/)
+
+- Risolto "StreamlitAPIException: Multiple Pages specified with URL pathname app": la
+  cartella 'pages/' attivava il meccanismo di navigazione automatico di Streamlit IN
+  AGGIUNTA al router st.navigation, duplicando l'entrypoint. Rinominata pages/ -> views/
+  (DEC-019b): l'automatismo non si attiva piu', resta solo il router esplicito.
+
 ## [1.0.1] — Fix deploy (navigazione)
 
 - Risolto StreamlitAPIException sul cloud (Python 3.14 / Streamlit recente): la

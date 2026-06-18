@@ -27,7 +27,7 @@ from src.services import (  # noqa: E402
 from src.services.portfolio_service import calcola_metriche  # noqa: E402
 from src.stress_testing import scenari_demo  # noqa: E402
 
-PAGES_DIR = Path(__file__).resolve().parents[1] / "pages"
+PAGES_DIR = Path(__file__).resolve().parents[1] / "views"
 
 # pattern di calcolo quantitativo che NON devono comparire nelle pagine
 _PATTERN_FORMULE = re.compile(

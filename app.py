@@ -1,7 +1,7 @@
 """DPI Wizard — entrypoint Streamlit con navigazione esplicita.
 
 Usa st.navigation / st.Page per dichiarare esplicitamente le pagine, invece dello
-scanning automatico della cartella pages/. Questo evita che moduli di supporto vengano
+scanning automatico (la cartella pages/ e' riservata a quel meccanismo). Questo evita che moduli di supporto vengano
 interpretati come pagine ed e' robusto rispetto alle versioni di Streamlit.
 
 Le pagine NON contengono formule: usano esclusivamente src.services e gli helper di
@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 st.set_page_config(page_title="DPI Wizard", page_icon="🧭", layout="wide")
 
-_P = "pages"
+_P = "views"
 pagine = [
     st.Page(f"{_P}/01_Home.py", title="Home", icon="🧭", default=True),
     st.Page(f"{_P}/02_Comparti.py", title="Comparti", icon="🗂️"),

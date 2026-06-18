@@ -228,3 +228,18 @@ Decisione: le pagine 10 e 11 importano direttamente dai moduli specifici
 aggregato src.services, e optimization_service importa direttamente dai moduli di
 src.optimization. Riduce la superficie di import caricata da ciascuna pagina e la rende
 piu' robusta rispetto all'ambiente.
+
+## DEC-019b — Cartella pagine rinominata views/ (fix definitivo navigazione)
+Data: 2026-06-18
+Stato: approvata (tecnica), sostituisce l'approccio parziale di DEC-019
+Problema residuo dopo DEC-019: usando st.navigation MA tenendo la cartella 'pages/',
+Streamlit Cloud attivava ANCHE il meccanismo automatico MPA v1 (riservato alla cartella
+'pages/'), che si sommava al router esplicito. Risultato: app.py registrato due volte ->
+"StreamlitAPIException: Multiple Pages specified with URL pathname app".
+Causa: il nome di cartella 'pages/' e' speciale per Streamlit e attiva la navigazione
+automatica indipendentemente da st.navigation.
+Decisione: rinominata la cartella 'pages/' in 'views/'. Cosi' l'automatismo non si attiva
+e resta solo il router esplicito st.navigation in app.py. Aggiornati app.py (_P="views"),
+test e controllo architetturale. I pathname delle pagine sono unici e nessuno collide con
+l'entrypoint 'app'.
+File: app.py, views/*, tests/test_pages.py, tests/test_integration.py.

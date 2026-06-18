@@ -18,10 +18,11 @@ Programma post-MVP approvato: M6 (fatta), M7 (ottimizzazione vincolata), M8
 (integrazione e validazione), M9 (white paper finale).
 
 ## Fix post-rilascio (deploy cloud)
-- Navigazione esplicita st.navigation (DEC-019): risolto StreamlitAPIException su
-  Python 3.14/Streamlit recente dovuto allo scanning automatico di pages/. Rimosso
-  pages/__init__.py; _state.py spostato in src/ui_state.py; set_page_config centralizzato
-  nel router; creata pages/01_Home.py.
+- Navigazione esplicita st.navigation + cartella rinominata pages/ -> views/ (DEC-019,
+  DEC-019b): risolto StreamlitAPIException su Python 3.14. La cartella 'pages/' attivava
+  il meccanismo automatico in aggiunta al router, duplicando l'entrypoint. Rimosso
+  __init__.py; _state.py -> src/ui_state.py; set_page_config nel router; creata
+  views/01_Home.py.
 - Import diretti dai moduli service nelle pagine 10/11 (DEC-020).
 - Suite 115 test verde.
 
