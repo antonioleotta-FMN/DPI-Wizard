@@ -27,7 +27,7 @@ init_stato()
 st.title("DPI Wizard")
 st.caption(
     "Supporto alla definizione, verifica e revisione del Documento sulla Politica "
-    "di Investimento del Fondo Pensione Mario Negri."
+    "di Investimento."
 )
 banner_demo()
 
