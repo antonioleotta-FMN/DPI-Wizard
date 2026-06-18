@@ -1,9 +1,0 @@
-# Fasce di versione compatibili e testate. Pin a fasce (non esatti) per massima
-# compatibilita' con l'ambiente di Streamlit Community Cloud.
-streamlit>=1.49,<2.0
-pandas>=2.2,<4.0
-numpy>=1.26,<3.0
-scipy>=1.13,<2.0
-plotly>=5.24,<7.0
-openpyxl>=3.1,<4.0
-pydantic>=2.9,<3.0
