@@ -3,6 +3,39 @@
 Tutte le modifiche rilevanti, per milestone. Le versioni stabili sono marcate con tag
 Git (DEC-010).
 
+## [0.4.0] — M8 — Integrazione, validazione e rilascio
+
+- Matrice di tracciabilità (docs/TRACEABILITY_MATRIX.md): requisito → pagina → modulo →
+  funzione → formula → parametri → test → doc.
+- Registro algoritmi completo (docs/ALGORITHM_REGISTER.md, ALG-01..ALG-25).
+- Rapporto di validazione (docs/VALIDATION_REPORT.md): perimetro, ambiente, test,
+  tolleranze, performance, controlli finali, anomalie risolte, limiti.
+- Controllo architetturale "nessuna formula nelle pagine": corretto il fan chart della
+  pagina 10 (np.percentile spostato in calculations/risk_metrics.bande_percentili).
+- Gestione del caso limite "montante non positivo" nel rendimento geometrico.
+- Test di integrazione end-to-end (tests/test_integration.py).
+- 114 test complessivi, tutti verdi. Deploy verificato.
+
+## [0.3.0] — M7 — Ottimizzazione vincolata dell'AAS
+
+- Funzioni obiettivo: minima varianza, massimo rendimento, massimo Sharpe
+  (src/optimization/objectives.py).
+- Vincoli configurabili: budget, bounds, gruppi, liquidità, illiquidità, rendimento,
+  volatilità, duration, valuta, turnover (src/optimization/constraints.py).
+- Solver SLSQP (DEC-015); turnover riformulato a variabili ausiliarie (DEC-016).
+- Frontiera efficiente e diagnostica di infeasibilità (efficient_frontier.py).
+- Pagina "Ottimizzazione AAS" (pagina 11). Validazione: minima varianza = soluzione
+  analitica. 109 test.
+
+## [0.2.0] — M6 — Simulazione CMA e stress test
+
+- Distribuzioni normale e t di Student multivariata, df configurabile (DEC-012).
+- Percorsi multi-periodo: frequenza, ribilanciamento, flussi, drawdown (DEC-014).
+- Metriche di rischio: VaR, ES, shortfall, shortfall medio condizionato.
+- Stress test deterministici separati dal Monte Carlo (DEC-013): scenari demo, shock di
+  tasso via duration/convexity.
+- Pagina "Simulazione CMA e Stress Test" (pagina 10). 94 test.
+
 ## [0.1.0] — MVP (M0 -> M5)
 
 ### M5 — Rifinitura e documentazione

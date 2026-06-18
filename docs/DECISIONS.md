@@ -120,3 +120,77 @@ Motivazione: profilo utente non-sviluppatore; semplicità.
 Alternative considerate: main/develop + branch funzionali.
 Impatto: procedura di rilascio (M finale).
 File interessati: README.md, docs.
+
+## DEC-001 (aggiornamento M6) — Definizione di shortfall: provvisoria e configurabile
+Data: 2026-06-18
+Stato: provvisoria, configurabile, NON ufficiale
+Aggiornamento: il valore predefinito di shortfall e' configurabile dall'utente. Valore
+tecnico iniziale adottato per lo sviluppo post-MVP: shortfall rispetto all'obiettivo
+del comparto (oltre alle altre definizioni gia' selezionabili). Il default resta
+modificabile a livello di comparto. Questi valori NON rappresentano decisioni ufficiali
+e devono essere validati dalla Funzione Gestione dei Rischi e dagli organi competenti
+del Fondo prima dell'utilizzo istituzionale nel DPI. Non impediscono lo sviluppo tecnico.
+
+## DEC-002 (aggiornamento M6) — Confidenza VaR/ES: provvisoria e configurabile
+Data: 2026-06-18
+Stato: provvisoria, configurabile, NON ufficiale
+Aggiornamento: livello di confidenza di VaR ed Expected Shortfall configurabile.
+Valori tecnici iniziali: 95% (default), 99% (alternativo selezionabile). Provvisori, da
+validare internamente prima dell'uso istituzionale. Non bloccano lo sviluppo.
+
+## DEC-012 — Distribuzione t di Student multivariata (M6)
+Data: 2026-06-18
+Stato: approvata (tecnica)
+Decisione: oltre alla normale multivariata, e' disponibile una t di Student
+multivariata con gradi di liberta' configurabili (default tecnico 5, vincolo df > 2).
+Parametrizzazione esplicita: matrice di scala S = (df-2)/df * Sigma, cosi' che la
+covarianza dei rendimenti sia Sigma. Motivazione: la normale sottostima le code; la t
+rende esplicito il rischio di coda (sequence-of-returns risk). Test: la covarianza
+empirica converge a Sigma; curtosi superiore alla normale.
+File interessati: src/simulations/distributions.py, tests/test_distributions.py.
+
+## DEC-013 — Stress test deterministici separati dal Monte Carlo (M6)
+Data: 2026-06-18
+Stato: approvata (tecnica)
+Decisione: gli stress test sono deterministici e NON producono probabilita; motore
+separato (src/stress_testing). Scenari demo etichettati e modificabili. Shock
+obbligazionari via duration (+ convexity se disponibile), con segnalazione
+dell'approssimazione. Motivazione: requisito esplicito del piano M6.
+File interessati: src/stress_testing/*, tests/test_stress.py.
+
+## DEC-014 — Frequenza e ribilanciamento configurabili (M6)
+Data: 2026-06-18
+Stato: approvata (tecnica)
+Decisione: il path engine supporta frequenza annuale/mensile e ribilanciamento ai pesi
+target o buy & hold, con flussi opzionali (contributi/uscite). Conversione dei
+rendimenti attesi (geometrica) e della covarianza (lineare nel tempo) alla frequenza.
+File interessati: src/simulations/path_engine.py, tests/test_path_engine.py.
+
+## DEC-015 — Solver di ottimizzazione: scipy SLSQP (M7)
+Data: 2026-06-18
+Stato: approvata (tecnica)
+Decisione: l'ottimizzazione vincolata usa scipy.optimize.minimize con metodo SLSQP, non
+cvxpy. Motivazione: SLSQP gestisce vincoli non lineari (volatilita massima, Sharpe), e'
+gia' tra le dipendenze (scipy), compatibile con Streamlit Cloud senza solver esterni.
+Tolleranza (ftol) e numero massimo di iterazioni configurabili. Validazione: la minima
+varianza coincide con la soluzione analitica w=Sigma^-1 1/(1'Sigma^-1 1).
+File: src/optimization/optimizer.py, tests/test_optimization.py.
+
+## DEC-016 — Turnover riformulato a variabili ausiliarie (M7)
+Data: 2026-06-18
+Stato: approvata (tecnica)
+Decisione: il vincolo di turnover sum|w-w0|<=T_max e' implementato riformulando il
+valore assoluto con variabili ausiliarie u_i>=|w_i-w0_i| e sum u_i<=T_max, perche' la
+forma diretta (L1, non liscia) non converge con SLSQP. La riformulazione e' lineare e
+robusta. File: src/optimization/optimizer.py (_ottimizza_con_turnover).
+
+## DEC-017 — Shortfall optimization: prevista, non implementata (M7)
+Data: 2026-06-18
+Stato: prevista (non implementata)
+Decisione: la minimizzazione della probabilita di shortfall (obiettivo non lineare che
+richiede Monte Carlo o approssimazione parametrica nel loop di ottimizzazione) NON e'
+implementata nel perimetro M7, per ragioni di stabilita e costo computazionale. L'
+architettura la prevede come estensione futura. Documentata come "prevista" nel registro
+algoritmi. Sono implementati tre obiettivi (minima varianza, massimo rendimento, massimo
+Sharpe) piu' il minimo rischio con rendimento target ottenibile via vincolo
+rendimento_min; il criterio M7 (>=4 obiettivi operativi) e' soddisfatto.

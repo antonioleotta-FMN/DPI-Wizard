@@ -10,17 +10,21 @@ liquidità ed esposizione valutaria al modificarsi dell'Asset Allocation Strateg
 con verifica dei vincoli e output riutilizzabili nel DPI.
 
 ## Milestone corrente
-M5 — Rifinitura e documentazione COMPLETATA. MVP completo (M0-M5).
+M8 — Integrazione, validazione complessiva e rilascio COMPLETATA. Integrazione pagine,
+controlli architetturali, matrice di tracciabilita, registro algoritmi, rapporto di
+validazione, verifica deploy. Suite 114 test verde.
+
+Programma post-MVP approvato: M6 (fatta), M7 (ottimizzazione vincolata), M8
+(integrazione e validazione), M9 (white paper finale).
 
 ## Funzionalità completate
-- Albero cartelle del repository (M0).
-- Modelli di dominio Pydantic (M0).
-- Metriche deterministiche (M1) + conversione geometrica (M5).
-- Data layer (M2): PSD/Higham, demo, IO Excel.
-- Monte Carlo + motore vincoli + service layer (M3).
-- MVP UI multipage (M4): 9 pagine.
-- Rifinitura e documentazione (M5): proiezioni geometriche (DEC-003) nel Lab e nei
-  servizi; manuale utente, manuale metodologico, glossario+data dictionary, changelog.
+- MVP completo M0-M5 (vedi changelog).
+- M6: src/simulations/distributions.py (normale + t multivariata, df configurabile);
+  src/simulations/path_engine.py (multi-periodo, frequenza, ribilanciamento, flussi,
+  drawdown); src/calculations/risk_metrics.py (VaR, ES, shortfall condizionato,
+  drawdown); src/stress_testing/* (scenari demo, motore deterministico, shock fixed
+  income); src/services/simulation_service.py (facade); pagina 10.
+- M7: ottimizzazione vincolata (src/optimization/*), service e pagina 11.
 
 ## Decisioni approvate
 Vedi docs/DECISIONS.md. Sintesi:
@@ -78,18 +82,19 @@ VaR percentile; Monte Carlo normale multivariata.
 
 ## Test disponibili
 - test_domain (19), test_calculations (18), test_data (10), test_simulations (12),
-  test_reporting (3), test_pages (10). Totale: 72 test, tutti passati.
+  test_reporting (3), test_pages (11), test_distributions (7), test_path_engine (6),
+  test_stress (8), test_optimization (14), test_integration (5). Totale: 114 test, tutti passati.
 
 ## Problemi aperti
-- DEC-001 e DEC-002 da validare dagli organi/Funzione Risk del Fondo prima dell'uso
-  con dati reali (scelte metodologiche che confluiscono nel DPI).
+- DEC-001 e DEC-002 provvisori/configurabili: da validare dagli organi/Funzione Risk
+  del Fondo prima dell'uso istituzionale (vedi avvertenza in pagina 10).
 
 ## Decisioni richieste all'utente
-Nessuna. MVP completo. Da concordare l'eventuale roadmap post-MVP.
+Nessuna. Programma M6-M9 approvato: si prosegue senza nuova scelta.
 
 ## Prossima milestone proposta
-MVP completato (M0-M5). Possibili sviluppi post-MVP, fuori dall'attuale perimetro:
-metodologie avanzate (t-Student, bootstrap, regimi, correlazioni stressate);
-ottimizzatore vincolato; persistenza su database; autenticazione; white paper
-metodologico esteso in PDF. Da avviare solo previa nuova definizione di perimetro e
-approvazione.
+M9 — White paper metodologico finale. Redazione di docs/WHITE_PAPER.md (fonte primaria)
+e, se possibile, versioni .docx/.pdf coerenti. Documenta solo le metodologie realmente
+implementate, collegando formula-codice-test, distinguendo validato/sperimentale/
+previsto/escluso. Fonti: codice definitivo, PROJECT_STATE, DECISIONS, TRACEABILITY_MATRIX,
+ALGORITHM_REGISTER, VALIDATION_REPORT, test, manuali, changelog.

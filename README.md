@@ -11,7 +11,7 @@ verifica dei vincoli e output riutilizzabili nel DPI.
 
 ## Stato
 
-MVP multipage funzionante (M4). Avvio locale:
+Post-MVP M6–M8 completati (M9 white paper in corso). Avvio locale:
 
 ```bash
 pip install -r requirements.txt
@@ -19,7 +19,8 @@ streamlit run app.py
 ```
 
 Le pagine: Home, Comparti, Assunzioni, Correlazioni, Asset Allocation Lab,
-Simulazioni, Confronto, Controlli, Report. Stato corrente e prossimi passi in
+Simulazioni, Confronto, Controlli, Report, Simulazione CMA e Stress Test,
+Ottimizzazione AAS. Stato corrente e prossimi passi in
 `docs/PROJECT_STATE.md`. Decisioni di progetto in `docs/DECISIONS.md`. Deploy su
 Streamlit Cloud: `docs/STREAMLIT_DEPLOY.md`. Caricamento su GitHub: `docs/GITHUB.md`.
 

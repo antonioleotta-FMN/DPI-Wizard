@@ -26,6 +26,8 @@ PAGINE = [
     "pages/07_Confronto.py",
     "pages/08_Controlli.py",
     "pages/09_Report.py",
+    "pages/10_Simulazione_CMA_Stress.py",
+    "pages/11_Ottimizzazione_AAS.py",
 ]
 
 

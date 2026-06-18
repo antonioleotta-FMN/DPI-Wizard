@@ -69,3 +69,36 @@ risultati di tutte le proposte, da scaricare e riusare nella documentazione del 
 Quando sostituirai i dati demo con quelli del Fondo (dalla pagina Assunzioni), ricorda
 di non committare file con dati reali nel repository pubblico e di valutare un'app
 privata. Vedi le note di privacy in STREAMLIT_DEPLOY.md e GITHUB.md.
+
+## Simulazione CMA e Stress Test (pagina 10)
+
+Due schede distinte.
+
+**Simulazione condizionata alle CMA.** Le Capital Market Assumptions (rendimenti,
+volatilità, correlazioni, costi, inflazione) sono gli input; il motore genera rendimenti
+futuri coerenti con tali ipotesi. Si scelgono: distribuzione (Normale o t di Student),
+gradi di libertà della t, orizzonte, frequenza (annuale/mensile), numero di simulazioni,
+seed, inflazione, livello di confidenza VaR/ES, ribilanciamento. Output: probabilità ed
+entità dello shortfall, VaR, Expected Shortfall, massimo drawdown mediano, istogramma dei
+montanti reali e fan chart dei percorsi. La distribuzione t mostra code più spesse: tende
+a produrre un Expected Shortfall più alto della Normale, evidenziando il rischio di coda.
+
+**Stress test deterministici.** Scenari di shock (azionario, tassi, illiquidi, combinato)
+applicati al portafoglio. Non sono probabilità: rappresentano l'impatto istantaneo di uno
+scenario. Output: perdita complessiva, nuovo valore, contributo alla perdita per asset
+class, quota illiquida post-shock. Gli scenari demo sono modificabili.
+
+## Ottimizzazione AAS (pagina 11)
+
+Si seleziona una AAS vigente di riferimento e una funzione obiettivo (minima varianza,
+massimo rendimento, massimo Sharpe). Si configurano vincoli aggiuntivi (rendimento
+minimo, volatilità massima, turnover massimo) oltre alle bande, liquidità e illiquidità
+del comparto. L'ottimizzatore propone un portafoglio, lo confronta con la AAS vigente
+(grafico dei pesi e turnover) e mostra la frontiera efficiente con il punto ottimizzato
+evidenziato. Se i vincoli sono incompatibili, l'app non restituisce pesi fittizi: segnala
+l'infeasibilità e indica i vincoli problematici. La proposta può essere salvata tra le
+proposte della sessione.
+
+> Avvertenza: i parametri predefiniti sono tecnici e provvisori e devono essere validati
+> dalla Funzione Gestione dei Rischi e dagli organi competenti del Fondo prima
+> dell'utilizzo formale nel DPI. I dati CMA, le matrici e i comparti sono demo.

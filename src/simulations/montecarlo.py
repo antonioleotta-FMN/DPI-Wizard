@@ -68,12 +68,11 @@ def _campiona_rendimenti(
 ) -> np.ndarray:
     """Campiona rendimenti annui multivariati normali.
 
+    Delega al modulo distributions (campionamento normale) per evitare duplicazione.
     Restituisce array (n_sim, n_anni, n_asset).
     """
-    n_asset = mu.shape[0]
-    # multivariate_normal genera (n_sim*n_anni, n_asset)
-    campioni = rng.multivariate_normal(mu, cov, size=(n_sim, n_anni))
-    return campioni.reshape(n_sim, n_anni, n_asset)
+    from src.simulations.distributions import campiona_normale
+    return campiona_normale(mu, cov, (n_sim, n_anni), rng)
 
 
 def _evolvi_montante(
