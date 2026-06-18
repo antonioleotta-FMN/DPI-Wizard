@@ -18,6 +18,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 
 PAGINE = [
     "app.py",
+    "pages/01_Home.py",
     "pages/02_Comparti.py",
     "pages/03_Assunzioni.py",
     "pages/04_Correlazioni.py",

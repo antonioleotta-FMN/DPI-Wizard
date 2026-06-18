@@ -10,12 +10,20 @@ liquidità ed esposizione valutaria al modificarsi dell'Asset Allocation Strateg
 con verifica dei vincoli e output riutilizzabili nel DPI.
 
 ## Milestone corrente
-M8 — Integrazione, validazione complessiva e rilascio COMPLETATA. Integrazione pagine,
-controlli architetturali, matrice di tracciabilita, registro algoritmi, rapporto di
-validazione, verifica deploy. Suite 114 test verde.
+M9 — White paper metodologico finale COMPLETATA. Programma M6-M9 concluso.
+docs/WHITE_PAPER.md (27 sezioni, fonte primaria) + WHITE_PAPER.docx + WHITE_PAPER.pdf
+(17 pagine), coerenti tra loro e verificati contro il codice definitivo.
 
 Programma post-MVP approvato: M6 (fatta), M7 (ottimizzazione vincolata), M8
 (integrazione e validazione), M9 (white paper finale).
+
+## Fix post-rilascio (deploy cloud)
+- Navigazione esplicita st.navigation (DEC-019): risolto StreamlitAPIException su
+  Python 3.14/Streamlit recente dovuto allo scanning automatico di pages/. Rimosso
+  pages/__init__.py; _state.py spostato in src/ui_state.py; set_page_config centralizzato
+  nel router; creata pages/01_Home.py.
+- Import diretti dai moduli service nelle pagine 10/11 (DEC-020).
+- Suite 115 test verde.
 
 ## Funzionalità completate
 - MVP completo M0-M5 (vedi changelog).
@@ -93,8 +101,8 @@ VaR percentile; Monte Carlo normale multivariata.
 Nessuna. Programma M6-M9 approvato: si prosegue senza nuova scelta.
 
 ## Prossima milestone proposta
-M9 — White paper metodologico finale. Redazione di docs/WHITE_PAPER.md (fonte primaria)
-e, se possibile, versioni .docx/.pdf coerenti. Documenta solo le metodologie realmente
-implementate, collegando formula-codice-test, distinguendo validato/sperimentale/
-previsto/escluso. Fonti: codice definitivo, PROJECT_STATE, DECISIONS, TRACEABILITY_MATRIX,
-ALGORITHM_REGISTER, VALIDATION_REPORT, test, manuali, changelog.
+Nessuna. Il programma approvato M6-M9 è concluso. Eventuali sviluppi successivi (export
+avanzato dei risultati di simulazione/ottimizzazione, shortfall optimization, persistenza,
+autenticazione) sono fuori dal perimetro corrente e richiederebbero una nuova definizione
+e approvazione. Resta prioritaria, prima di qualsiasi uso reale, la validazione interna di
+DEC-001/002 e la sostituzione dei dati demo con i dati ufficiali del Fondo.

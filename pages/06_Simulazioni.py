@@ -10,7 +10,7 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pages._state import (  # noqa: E402
+from src.ui_state import (  # noqa: E402
     banner_demo,
     get_cma,
     get_comparto,
@@ -22,7 +22,6 @@ from pages._state import (  # noqa: E402
 from src.domain.models import ConfigSimulazione  # noqa: E402
 from src.services import esegui_simulazione  # noqa: E402
 
-st.set_page_config(page_title="Simulazioni — DPI Wizard", page_icon="🎲", layout="wide")
 init_stato()
 st.title("Simulazioni Monte Carlo")
 banner_demo()

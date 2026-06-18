@@ -9,7 +9,7 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pages._state import banner_demo, get_comparto, init_stato, set_comparto  # noqa: E402
+from src.ui_state import banner_demo, get_comparto, init_stato, set_comparto  # noqa: E402
 from src.domain.models import (  # noqa: E402
     Comparto,
     ConfigShortfall,
@@ -17,7 +17,6 @@ from src.domain.models import (  # noqa: E402
     TipoObiettivo,
 )
 
-st.set_page_config(page_title="Comparti — DPI Wizard", page_icon="🗂️", layout="wide")
 init_stato()
 st.title("Comparti")
 banner_demo()

@@ -11,11 +11,10 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pages._state import banner_demo, get_cma, init_stato, set_cma  # noqa: E402
+from src.ui_state import banner_demo, get_cma, init_stato, set_cma  # noqa: E402
 from src.data.excel_io import esporta_cma_excel, importa_cma_excel  # noqa: E402
 from src.domain.models import AssetClass, CMASet, MatriceCorrelazione  # noqa: E402
 
-st.set_page_config(page_title="Assunzioni — DPI Wizard", page_icon="📊", layout="wide")
 init_stato()
 st.title("Assunzioni delle asset class")
 banner_demo()

@@ -10,7 +10,7 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pages._state import (  # noqa: E402
+from src.ui_state import (  # noqa: E402
     SEMAFORO,
     banner_demo,
     get_cma,
@@ -20,7 +20,6 @@ from pages._state import (  # noqa: E402
 )
 from src.services import verifica  # noqa: E402
 
-st.set_page_config(page_title="Controlli — DPI Wizard", page_icon="✅", layout="wide")
 init_stato()
 st.title("Controlli sui vincoli")
 banner_demo()

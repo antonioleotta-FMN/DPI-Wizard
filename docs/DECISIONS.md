@@ -194,3 +194,37 @@ architettura la prevede come estensione futura. Documentata come "prevista" nel 
 algoritmi. Sono implementati tre obiettivi (minima varianza, massimo rendimento, massimo
 Sharpe) piu' il minimo rischio con rendimento target ottenibile via vincolo
 rendimento_min; il criterio M7 (>=4 obiettivi operativi) e' soddisfatto.
+
+## DEC-018 — White paper collocato in M9, fedele al codice (M9)
+Data: 2026-06-18
+Stato: approvata
+Decisione: il white paper metodologico è prodotto come ultima milestone (M9), dopo
+sviluppo, integrazione e validazione, così da documentare solo metodologie realmente
+implementate. Fonte primaria: docs/WHITE_PAPER.md; versioni .docx e .pdf coerenti generate
+da essa. Regola applicata: ogni formula citata è collegata a funzione e test; le
+metodologie sono classificate in implementate-validate / previste / escluse. In caso di
+difformità documento-codice, fa fede il codice. Controllo di coerenza finale eseguito:
+funzioni, file e numeri dell'esempio verificati contro il codice definitivo.
+
+## DEC-019 — Navigazione esplicita st.navigation (fix deploy)
+Data: 2026-06-18
+Stato: approvata (tecnica)
+Problema: sul cloud (Python 3.14, Streamlit recente) l'app falliva con
+StreamlitAPIException in _mpa_v1/_navigation. Causa: lo scanning automatico della cartella
+pages/ trattava i moduli di supporto (__init__.py, _state.py) come pagine.
+Decisione: navigazione esplicita con st.navigation/st.Page nell'entrypoint app.py.
+Modifiche: rimosso pages/__init__.py; spostato pages/_state.py in src/ui_state.py (import
+aggiornati ovunque); rimossi i st.set_page_config dalle singole pagine (la config e' ora
+unica nel router); creata pages/01_Home.py. Le pagine non dipendono piu' dal package
+'pages'. Beneficio: robustezza rispetto alle versioni di Streamlit/Python, niente piu'
+ambiguita' nello scanning.
+File: app.py, pages/01_Home.py, src/ui_state.py, tutte le pagine.
+
+## DEC-020 — Import diretti dai moduli service nelle pagine (robustezza deploy)
+Data: 2026-06-18
+Stato: approvata (tecnica)
+Decisione: le pagine 10 e 11 importano direttamente dai moduli specifici
+(src.services.simulation_service, src.services.optimization_service) anziche' dall'init
+aggregato src.services, e optimization_service importa direttamente dai moduli di
+src.optimization. Riduce la superficie di import caricata da ciascuna pagina e la rende
+piu' robusta rispetto all'ambiente.

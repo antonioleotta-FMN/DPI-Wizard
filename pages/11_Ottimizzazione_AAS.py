@@ -17,7 +17,7 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pages._state import (  # noqa: E402
+from src.ui_state import (  # noqa: E402
     banner_demo,
     get_cma,
     get_comparto,
@@ -25,13 +25,12 @@ from pages._state import (  # noqa: E402
     init_stato,
     salva_proposta,
 )
-from src.services import (  # noqa: E402
+from src.services.optimization_service import (  # noqa: E402
     calcola_frontiera,
     costruisci_config_da_comparto,
     ottimizza_aas,
 )
 
-st.set_page_config(page_title="Ottimizzazione AAS", page_icon="🎯", layout="wide")
 init_stato()
 st.title("Ottimizzazione AAS")
 banner_demo()

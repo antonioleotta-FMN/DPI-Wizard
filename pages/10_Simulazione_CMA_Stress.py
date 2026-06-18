@@ -18,21 +18,20 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pages._state import (  # noqa: E402
+from src.ui_state import (  # noqa: E402
     banner_demo,
     get_cma,
     get_comparto,
     get_proposte,
     init_stato,
 )
-from src.services import (  # noqa: E402
+from src.services.simulation_service import (  # noqa: E402
     ParametriSimulazioneCMA,
     esegui_simulazione_cma,
     esegui_stress,
 )
-from src.stress_testing import scenari_demo  # noqa: E402
+from src.stress_testing.scenarios import scenari_demo  # noqa: E402
 
-st.set_page_config(page_title="Simulazione CMA e Stress Test", page_icon="🌐", layout="wide")
 init_stato()
 st.title("Simulazione CMA e Stress Test")
 banner_demo()

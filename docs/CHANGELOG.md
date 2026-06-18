@@ -3,6 +3,26 @@
 Tutte le modifiche rilevanti, per milestone. Le versioni stabili sono marcate con tag
 Git (DEC-010).
 
+## [1.0.1] — Fix deploy (navigazione)
+
+- Risolto StreamlitAPIException sul cloud (Python 3.14 / Streamlit recente): la
+  navigazione automatica della cartella pages/ trattava i moduli di supporto come
+  pagine. Passaggio a navigazione esplicita st.navigation/st.Page (DEC-019).
+- pages/__init__.py rimosso; _state.py -> src/ui_state.py; set_page_config nel router;
+  creata pages/01_Home.py. Import diretti dai moduli service (DEC-020).
+- 115 test verdi.
+
+## [1.0.0] — M9 — White paper metodologico finale
+
+- docs/WHITE_PAPER.md: white paper a 27 sezioni (fonte primaria), dall'executive summary
+  al rischio di modello, governance, uso nel DPI, esempio numerico riproducibile,
+  glossario e appendici.
+- docs/WHITE_PAPER.docx e docs/WHITE_PAPER.pdf (17 pagine) coerenti con il Markdown.
+- Regola formula-codice-test applicata; metodologie classificate in
+  implementate-validate / previste / escluse (DEC-018).
+- Controllo di coerenza finale: funzioni, file e numeri dell'esempio verificati contro il
+  codice definitivo. Programma M6-M9 concluso.
+
 ## [0.4.0] — M8 — Integrazione, validazione e rilascio
 
 - Matrice di tracciabilità (docs/TRACEABILITY_MATRIX.md): requisito → pagina → modulo →

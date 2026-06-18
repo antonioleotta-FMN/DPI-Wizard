@@ -15,16 +15,17 @@ import numpy as np
 
 from src.calculations.metrics import matrice_covarianza
 from src.domain.models import CMASet, Comparto, Proposta
-from src.optimization import (
-    ConfigVincoli,
-    EsitoDiagnostica,
-    PuntoFrontiera,
+from src.optimization.constraints import ConfigVincoli, turnover
+from src.optimization.optimizer import (
     RisultatoOttimizzazione,
     arrotonda_pesi,
+    ottimizza,
+)
+from src.optimization.efficient_frontier import (
+    EsitoDiagnostica,
+    PuntoFrontiera,
     diagnostica_infeasibilita,
     frontiera_efficiente,
-    ottimizza,
-    turnover,
 )
 
 
