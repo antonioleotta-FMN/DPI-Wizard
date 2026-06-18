@@ -10,21 +10,17 @@ liquidità ed esposizione valutaria al modificarsi dell'Asset Allocation Strateg
 con verifica dei vincoli e output riutilizzabili nel DPI.
 
 ## Milestone corrente
-M3 — Monte Carlo + motore vincoli + pagina diagnostica COMPLETATA.
+M5 — Rifinitura e documentazione COMPLETATA. MVP completo (M0-M5).
 
 ## Funzionalità completate
 - Albero cartelle del repository (M0).
 - Modelli di dominio Pydantic (M0).
-- Metriche deterministiche (M1).
+- Metriche deterministiche (M1) + conversione geometrica (M5).
 - Data layer (M2): PSD/Higham, demo, IO Excel.
-- Monte Carlo normale multivariata (M3): orizzonti, costi, inflazione, ribilanciamento
-  annuale, seed, percentili, P(shortfall) per definizione attiva, VaR, ES di mercato,
-  ES mancato obiettivo.
-- Motore vincoli (M3): bande asset class, quota illiquida, liquidita minima, somma
-  pesi; esito a semaforo OK/WARNING/VIOLATO con riepilogo.
-- Service layer (M3): facade dominio->calcoli/simulazioni/vincoli; conversione ad
-  array ordinati.
-- app.py: pagina diagnostica Streamlit deployabile (smoke test, dati demo).
+- Monte Carlo + motore vincoli + service layer (M3).
+- MVP UI multipage (M4): 9 pagine.
+- Rifinitura e documentazione (M5): proiezioni geometriche (DEC-003) nel Lab e nei
+  servizi; manuale utente, manuale metodologico, glossario+data dictionary, changelog.
 
 ## Decisioni approvate
 Vedi docs/DECISIONS.md. Sintesi:
@@ -68,29 +64,32 @@ ES di mercato (CVaR) vs mancato raggiungimento obiettivo (denominazioni distinte
 VaR percentile; Monte Carlo normale multivariata.
 
 ## File principali
-- app.py — entrypoint Streamlit, pagina diagnostica (M3).
-- src/domain/models.py — modelli di dominio (M0).
-- src/calculations/metrics.py — metriche deterministiche (M1).
+- app.py — Home Streamlit (M4).
+- pages/_state.py — stato condiviso (M4).
+- pages/02..09_*.py — le 8 pagine funzionali (M4).
+- src/domain/models.py — modelli (M0).
+- src/calculations/metrics.py — metriche (M1).
 - src/data/{validation,demo,excel_io}.py — data layer (M2).
 - src/simulations/montecarlo.py — Monte Carlo (M3).
-- src/constraints/engine.py — motore vincoli (M3).
-- src/services/portfolio_service.py — facade dominio<->UI (M3).
+- src/constraints/engine.py — vincoli (M3).
+- src/services/portfolio_service.py — facade (M3).
+- src/reporting/excel_report.py — report Excel (M4).
 - docs/{PROJECT_STATE,DECISIONS,GITHUB,STREAMLIT_DEPLOY}.md.
 
 ## Test disponibili
-- tests/test_domain.py (19), test_calculations.py (15), test_data.py (10),
-  test_simulations.py (12). Totale: 56 test, tutti passati.
-- App verificata in avvio headless (health check ok).
+- test_domain (19), test_calculations (18), test_data (10), test_simulations (12),
+  test_reporting (3), test_pages (10). Totale: 72 test, tutti passati.
 
 ## Problemi aperti
 - DEC-001 e DEC-002 da validare dagli organi/Funzione Risk del Fondo prima dell'uso
-  con dati reali.
+  con dati reali (scelte metodologiche che confluiscono nel DPI).
 
 ## Decisioni richieste all'utente
-Nessuna in sospeso. Alla fine di M3: approvazione per passare a M4 (MVP multipage).
+Nessuna. MVP completo. Da concordare l'eventuale roadmap post-MVP.
 
 ## Prossima milestone proposta
-M4 — MVP UI multipage: trasformare la diagnostica nelle 9 pagine previste (home,
-comparti, assunzioni, correlazioni, AA Lab, simulazioni, confronto, controlli, report),
-con import/export Excel collegati, editing dei pesi e confronto scenari. Le pagine
-useranno solo i servizi gia' pronti. Poi M5 (reporting/export completo) e rilascio.
+MVP completato (M0-M5). Possibili sviluppi post-MVP, fuori dall'attuale perimetro:
+metodologie avanzate (t-Student, bootstrap, regimi, correlazioni stressate);
+ottimizzatore vincolato; persistenza su database; autenticazione; white paper
+metodologico esteso in PDF. Da avviare solo previa nuova definizione di perimetro e
+approvazione.

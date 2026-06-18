@@ -191,3 +191,34 @@ def risk_contribution(
     cctr = w * mctr
     pctr = cctr / sigma_p
     return mctr, cctr, pctr
+
+
+def rendimento_geometrico(r_aritmetico: float, sigma: float) -> float:
+    """Rendimento geometrico atteso approssimato (DEC-003).
+
+    DEFINIZIONE
+        g ~= mu - sigma^2 / 2
+    INPUT
+        r_aritmetico   rendimento atteso aritmetico annuo (mu)
+        sigma          volatilita annua del portafoglio
+    OUTPUT
+        scalare: rendimento geometrico atteso annuo
+    IPOTESI
+        Approssimazione log-normale standard. Valida per rendimenti/volatilita su base
+        annua nell'ordine di grandezza tipico di un portafoglio previdenziale.
+    LIMITI
+        E' un'approssimazione: la stima geometrica "esatta" emerge dalla mediana dei
+        montanti del Monte Carlo. Qui serve per le proiezioni deterministiche delle
+        pagine, coerentemente con la convenzione geometrica (DEC-003).
+    """
+    return r_aritmetico - 0.5 * sigma * sigma
+
+
+def montante_atteso(r_geometrico: float, orizzonte_anni: int) -> float:
+    """Montante atteso per 1 unita di capitale, capitalizzazione composta.
+
+    DEFINIZIONE
+        montante = (1 + g) ** orizzonte
+    """
+    return (1.0 + r_geometrico) ** orizzonte_anni
+

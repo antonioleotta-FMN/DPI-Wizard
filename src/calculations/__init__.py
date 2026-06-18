@@ -5,4 +5,6 @@ from .metrics import (
     rendimento_reale,
     rendimento_netto_costi,
     risk_contribution,
+    rendimento_geometrico,
+    montante_atteso,
 )

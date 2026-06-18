@@ -141,3 +141,22 @@ def test_risk_contribution_caso_manuale_due_asset():
 def test_risk_contribution_volatilita_nulla():
     with pytest.raises(ValueError):
         risk_contribution([0.5, 0.5], np.zeros((2, 2)))
+
+
+# --------------------------- rendimento_geometrico ------------------------ #
+def test_rendimento_geometrico_manuale():
+    from src.calculations.metrics import montante_atteso, rendimento_geometrico
+    # mu=0.05, sigma=0.10 -> g = 0.05 - 0.5*0.01 = 0.045
+    assert abs(rendimento_geometrico(0.05, 0.10) - 0.045) < TOL
+
+
+def test_rendimento_geometrico_minore_di_aritmetico():
+    from src.calculations.metrics import rendimento_geometrico
+    # il drag di volatilita rende g < mu quando sigma > 0
+    assert rendimento_geometrico(0.06, 0.15) < 0.06
+
+
+def test_montante_atteso_manuale():
+    from src.calculations.metrics import montante_atteso
+    # g=0.03, 10 anni -> 1.03^10
+    assert abs(montante_atteso(0.03, 10) - 1.03 ** 10) < 1e-12

@@ -17,7 +17,9 @@ import numpy as np
 
 from src.calculations.metrics import (
     matrice_covarianza,
+    montante_atteso,
     rendimento_atteso,
+    rendimento_geometrico,
     rendimento_netto_costi,
     rendimento_reale,
     risk_contribution,
@@ -33,6 +35,8 @@ class MetricheDeterministiche:
     rendimento_nominale: float
     rendimento_netto_costi: float
     rendimento_reale: float
+    rendimento_geometrico_reale: float
+    montante_reale_atteso: float
     volatilita: float
     quota_illiquida: float
     esposizione_valutaria_non_coperta: float
@@ -62,9 +66,13 @@ def _covarianza(cma: CMASet, sigma: np.ndarray) -> np.ndarray:
 
 
 def calcola_metriche(
-    cma: CMASet, proposta: Proposta, inflazione: float
+    cma: CMASet, proposta: Proposta, inflazione: float, orizzonte_anni: int = 1
 ) -> MetricheDeterministiche:
-    """Calcola tutte le metriche deterministiche di una proposta."""
+    """Calcola tutte le metriche deterministiche di una proposta.
+
+    orizzonte_anni serve per il montante reale atteso (capitalizzazione composta del
+    rendimento geometrico, DEC-003).
+    """
     nomi, pesi, mu, sigma, costi = _ordina(cma, proposta)
     cov = _covarianza(cma, sigma)
 
@@ -72,6 +80,9 @@ def calcola_metriche(
     r_net = rendimento_netto_costi(pesi, mu, costi)
     r_reale = rendimento_reale(r_net, inflazione)
     vol = volatilita(pesi, cov)
+    # convenzione geometrica per le proiezioni (DEC-003)
+    r_geom_reale = rendimento_geometrico(r_reale, vol)
+    montante = montante_atteso(r_geom_reale, orizzonte_anni)
 
     ac_per_nome = {ac.nome: ac for ac in cma.asset_class}
     quota_illiquida = sum(
@@ -102,6 +113,8 @@ def calcola_metriche(
         rendimento_nominale=r_nom,
         rendimento_netto_costi=r_net,
         rendimento_reale=r_reale,
+        rendimento_geometrico_reale=r_geom_reale,
+        montante_reale_atteso=montante,
         volatilita=vol,
         quota_illiquida=quota_illiquida,
         esposizione_valutaria_non_coperta=esp_val,

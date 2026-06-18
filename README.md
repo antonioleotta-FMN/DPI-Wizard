@@ -11,8 +11,20 @@ verifica dei vincoli e output riutilizzabili nel DPI.
 
 ## Stato
 
-In sviluppo per milestone. Stato corrente e prossimi passi in `docs/PROJECT_STATE.md`.
-Decisioni di progetto in `docs/DECISIONS.md`.
+MVP multipage funzionante (M4). Avvio locale:
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Le pagine: Home, Comparti, Assunzioni, Correlazioni, Asset Allocation Lab,
+Simulazioni, Confronto, Controlli, Report. Stato corrente e prossimi passi in
+`docs/PROJECT_STATE.md`. Decisioni di progetto in `docs/DECISIONS.md`. Deploy su
+Streamlit Cloud: `docs/STREAMLIT_DEPLOY.md`. Caricamento su GitHub: `docs/GITHUB.md`.
+
+Documentazione: `docs/MANUALE_UTENTE.md`, `docs/MANUALE_METODOLOGICO.md`,
+`docs/GLOSSARIO.md` (glossario e data dictionary), `docs/CHANGELOG.md`.
 
 > **Avvertenza.** L'app e' uno strumento di supporto alle decisioni. Non sostituisce
 > la valutazione degli organi del Fondo, della Funzione Gestione dei rischi, della

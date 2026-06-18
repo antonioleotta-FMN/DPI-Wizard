@@ -1,6 +1,6 @@
 # Fasce di versione compatibili e testate. Pin a fasce (non esatti) per massima
 # compatibilita' con l'ambiente di Streamlit Community Cloud.
-streamlit>=1.40,<2.0
+streamlit>=1.49,<2.0
 pandas>=2.2,<4.0
 numpy>=1.26,<3.0
 scipy>=1.13,<2.0
